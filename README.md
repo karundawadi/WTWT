@@ -1,6 +1,6 @@
-# Recomnly
+# WTWT
 
- A website that recommends you entertainment realted materials. 
+What to watch tonight? A movie recommendation system. 
 
  ## Live at: 
  http://recomnly.surge.sh/
