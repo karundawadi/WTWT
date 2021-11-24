@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: flux
+Version: 1.3.5
+Summary: Artificial time library
+Home-page: https://github.com/getslash/flux
+Author: Rotem Yaari
+Author-email: vmalloc@gmail.com
+License: BSD
+Description: ![Hackerman](https://www.gravatar.com/avatar/2090713a50fcdae69b802e73815000a4?s=328&d=identicon&r=PG ) 
+        
+        
+        # What is Flux?
+        Flux is a Python library enabling you to create virtual timelines and use them to test long processes.
+        
+        For more details, see the documentation at http://flux.readthedocs.org
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Provides-Extra: testing
