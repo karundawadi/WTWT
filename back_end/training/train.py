@@ -1,29 +1,50 @@
 import pandas as pd 
-import numpy as np 
+import warnings
 
-movies_names = pd.read_csv("movies.csv")
+def recommend_movies(movie_name,user_filter):
+    ratings_provided = pd.read_csv("training/ratings.csv")
+    movie_names_provided = pd.read_csv("training/movies.csv")
 
-# Reading and labelling the ratings file
-user_ratings = pd.read_csv("ratings.csv")
+    # Merging both ratings provided and movie names provided such that we have access to the titles 
+    ratings_provided = pd.merge(ratings_provided,movie_names_provided,on='movieId')
 
-user_ratings = pd.merge(user_ratings,movies_names,on="movieId")
-print(user_ratings.head(10))
+    # Dropping unnecessary columns to increase efficency; the more data means more time taken 
+    ratings_provided.drop(ratings_provided.columns[[3, 5]], axis = 1, inplace = True)
 
-mean_ratings_movies = pd.DataFrame(user_ratings.groupby('movieId')['rating'].mean())
-mean_ratings_movies['number of ratings'] = pd.DataFrame(user_ratings.groupby('movieId')['rating'].count())
+    # Of the ratings provided calculating the mean and storing it in ratings 
+    ratings = pd.DataFrame(ratings_provided.groupby('title')['rating'].mean())
 
-# Creating movie matrix 
-piv_movie_mat = user_ratings.pivot_table(index='userId',columns='title',values='rating')
-print(mean_ratings_movies.sort_values('number of ratings',ascending=False).head(10))
+    # Adding the number of times a rating was given by an user; will later be used 
+    ratings['no of ratings'] = pd.DataFrame(ratings_provided.groupby('title')['rating'].count())
 
-movie_rated = piv_movie_mat['Pulp Fiction (1994)']
-similar_to_movie_rated = piv_movie_mat.corrwith(movie_rated)
-corr_movie_rated = pd.DataFrame(similar_to_movie_rated,columns=["Correlation"])
+    # Creating a table with all the movies names and users 
+    movie_pivot_table = ratings_provided.pivot_table(index='userId',columns="title",values='rating')
 
-corr_movie_rated.dropna(inplace=True) # Drops all the N/A
-
-corr_movie_rated = corr_movie_rated.join(mean_ratings_movies['number of ratings'])
-corr_movie_rated = corr_movie_rated[corr_movie_rated['number of ratings']>5].sort_values("Correlation",ascending=False)
-print(corr_movie_rated.head(10))
-
-print("Done")
+    movie_selected = movie_name
+    
+    # Finding the list of users and their corresponding movies ratings 
+    user_selected_movie_ratings = movie_pivot_table[movie_selected]
+    
+    # Doing a corelation to estimate which movie will be recommended by a group who has watched similar movies 
+    similar_to_user_selected_movie = movie_pivot_table.corrwith(user_selected_movie_ratings)
+    
+    # Creating a column named corelation 
+    corr_user_movies = pd.DataFrame(similar_to_user_selected_movie,columns=['Corelation'])
+    
+    # Many movies will be unwatched by this section of people; dropping them 
+    corr_user_movies.dropna(inplace=True)
+    
+    # Joining the movies list with number of ratings to filter them 
+    corr_user_movies = corr_user_movies.join(ratings['no of ratings'])
+    
+    # Sorting on the based of number of ratings; the user can choose the no of users ratings 
+    movies_recommended = corr_user_movies[corr_user_movies['no of ratings']>user_filter].sort_values('Corelation',ascending=False)
+    
+    # Data formatting 
+    values = movies_recommended.head(10)
+    return_values = []
+    for i in range(1,6):
+        return_values.append(values.iloc[i].name)
+        
+    # Will send top 5 movies 
+    return return_values
