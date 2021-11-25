@@ -1,5 +1,4 @@
 import pandas as pd 
-import warnings
 
 def recommend_movies(movie_name,user_filter):
     ratings_provided = pd.read_csv("training/ratings.csv")
@@ -19,7 +18,6 @@ def recommend_movies(movie_name,user_filter):
 
     # Creating a table with all the movies names and users 
     movie_pivot_table = ratings_provided.pivot_table(index='userId',columns="title",values='rating')
-
     movie_selected = movie_name
     
     # Finding the list of users and their corresponding movies ratings 
@@ -27,11 +25,12 @@ def recommend_movies(movie_name,user_filter):
     
     # Doing a corelation to estimate which movie will be recommended by a group who has watched similar movies 
     similar_to_user_selected_movie = movie_pivot_table.corrwith(user_selected_movie_ratings)
-    
+
     # Creating a column named corelation 
     corr_user_movies = pd.DataFrame(similar_to_user_selected_movie,columns=['Corelation'])
     
     # Many movies will be unwatched by this section of people; dropping them 
+    # To improve the accuracy we can actually predict the values 
     corr_user_movies.dropna(inplace=True)
     
     # Joining the movies list with number of ratings to filter them 

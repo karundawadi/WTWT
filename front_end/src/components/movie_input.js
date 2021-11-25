@@ -1,6 +1,7 @@
 import React from 'react'
-import {Autocomplete, TextField, Typography, Grid, Button, Box, createFilterOptions, Modal} from '@mui/material'
+import {Autocomplete, TextField, Typography, Grid, Button, Box, createFilterOptions, Modal, CircularProgress} from '@mui/material'
 import axios from 'axios'
+import {ArrowRight} from 'react-bootstrap-icons'
 
 const style = {
     position: 'absolute',
@@ -12,8 +13,6 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-
-    textAlign:'center'
 };
 
 function MovieInput(props){
@@ -21,14 +20,19 @@ function MovieInput(props){
     const [numberPeople,onNumberPeopleChange] = React.useState(100)
     const [open, setOpen] = React.useState(false);
     const [recommended_movies,onRecommendedMoviesChange] = React.useState([])
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+
+    const [loadingopen, setLoadingOpen] = React.useState(false)
+    const handleLoadingOpen = () => setLoadingOpen(true)
+    const handleLoadingClose = () => setLoadingOpen(false)
+
     const data = require('../movies_name/movies.json');
     const movies = []
 
     const movies_recommended_list = recommended_movies.map(
         (name_of_movie) => 
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>{name_of_movie}</Typography>
+            <Typography sx={{ mt: 2 }}><ArrowRight/> {name_of_movie}</Typography>
         )
 
     for (let i = 0; i < data.length; i++) {
@@ -47,12 +51,34 @@ function MovieInput(props){
                 aria-describedby="modal-modal-description"
                 >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Recommended Movies
-                    </Typography>
+                    <Box style={{textAlign:'center'}}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Recommended Movies
+                        </Typography>
+                    </Box>       
+                    <Box p={2} />    
+                    <Typography id="modal-modal-title">
+                        If you watched {movieName}, you might like:
+                    </Typography>       
                     {movies_recommended_list}
                     <Box p={2} />
-                    <Button variant="outlined" color="error" onClick={handleClose}>Close</Button>
+                    <Box style={{textAlign:'center'}}>
+                        <Button variant="outlined" color="error" onClick={handleClose}>Close</Button>
+                    </Box>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={loadingopen}
+                onClose={handleLoadingClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                >
+                <Box sx={style}>
+                    <Box style={{textAlign:'center'}}>
+                        <Typography >Loading</Typography>
+                        <CircularProgress/>
+                    </Box>
                 </Box>
             </Modal>
 
@@ -92,22 +118,28 @@ function MovieInput(props){
 
                     <Grid container justifyContent="center" pt={4}>
                         <Button onClick={()=>{
-                            alert("Checking recommendations. Takes about 20 seconds.")
-                            var string_to_pass = "http://127.0.0.1:5000/recommend/"+ String(movieName) + "/" + String(numberPeople)
-                            console.log(string_to_pass)
-                            axios.get(string_to_pass).then(
-                                response=>{
-                                    console.log("The response is: ")
-                                    console.log(response.data)
-                                    var movies_seen = response.data
-                                    onRecommendedMoviesChange(movies_seen)
-                                    handleOpen()
-                                }
-                            ).catch(
-                                respons=>{
-                                    console.log(respons)
-                                }
-                            )
+                            // Checking for the data types entered     
+                            if(movieName == "" || numberPeople <= 0){
+                                alert("There is a data verification error. \nPlease check the input fields again!")
+                            }else{
+                                handleLoadingOpen()
+                                var string_to_pass = "http://127.0.0.1:5000/recommend/"+ String(movieName) + "/" + String(numberPeople)
+                                axios.get(string_to_pass).then(
+                                    response=>{
+                                        console.log("The response is: ")
+                                        console.log(response.data)
+                                        var movies_seen = response.data
+                                        onRecommendedMoviesChange(movies_seen)
+                                        handleOpen()
+                                    }
+                                ).catch(
+                                    respons=>{
+                                        console.log(respons)
+                                    }
+                                ).finally(()=>{
+                                    handleLoadingClose()
+                                })
+                            }
                         }} variant="outlined" color="success">Sumbit</Button>
                     </Grid>
                 </Grid> 
@@ -115,5 +147,7 @@ function MovieInput(props){
         </React.Fragment>
     )
 }
+
+
 
 export default MovieInput
