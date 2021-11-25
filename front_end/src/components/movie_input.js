@@ -119,7 +119,7 @@ function MovieInput(props){
                     <Grid container justifyContent="center" pt={4}>
                         <Button onClick={()=>{
                             // Checking for the data types entered     
-                            if(movieName == "" || numberPeople <= 0){
+                            if(movieName === "" || numberPeople <= 0){
                                 alert("There is a data verification error. \nPlease check the input fields again!")
                             }else{
                                 handleLoadingOpen()
