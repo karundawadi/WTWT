@@ -43,7 +43,7 @@ def recommend_movies(movie_name,user_filter):
     values = movies_recommended.head(10)
     return_values = []
     for i in range(1,6):
-        return_values.append(values.iloc[i].name)
+        return_values.append(values.iloc[i].name) # Changing to array format
         
     # Will send top 5 movies 
     return return_values

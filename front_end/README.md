@@ -1,6 +1,9 @@
-# WTWT
+## What to watch tonight ?
 
-What to watch tonight? A movie recommendation system. 
+WTWT is a movie recommendation system. This directory consists of the front end components of the system. 
 
- ## Live at: 
- http://recomnly.surge.sh/
+## Packages installed under npm 
+
+React, Axios, Material UI, Bootstrap 
+
+### Front end system is live at http://recomnly.surge.sh/

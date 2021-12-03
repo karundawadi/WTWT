@@ -1,4 +1,0 @@
-Pandas 
-Flask 
-React 
-flask-cors
