@@ -6,4 +6,4 @@ WTWT is a movie recommendation system. This directory consists of the front end 
 
 React, Axios, Material UI, Bootstrap 
 
-### Front end system is live at http://recomnly.surge.sh/
+### Front end system is live at https://karundawadi.github.io/WTWT

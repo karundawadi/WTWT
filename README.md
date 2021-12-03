@@ -13,7 +13,7 @@ Python and its various libraries (`Pandas`, `Numpy`,`Flask`,`Flask-CORS`) are us
 The training and recommendation is done using the data avialble at https://grouplens.org/datasets/movielens/
 
 ## Front-end system 
-Front end system is written using Javascript and its various libraries (`React`,`Axios`,`Materail UI`,`Bootstrap`). The live version hosted at http://recomnly.surge.sh/ does not work until the backend server is started. To see a working version of the web application please follow instruction on installtion section below. 
+Front end system is written using Javascript and its various libraries (`React`,`Axios`,`Materail UI`,`Bootstrap`). The live version hosted at https://karundawadi.github.io/WTWT does not work until the backend server is started. To see a working version of the web application please follow instruction on installtion section below. 
 
 ## Installation 
 
@@ -37,3 +37,7 @@ Front end system is written using Javascript and its various libraries (`React`,
 ## Contributing 
 
 You can fork the repository to make further changes. You can also raise issues if you encounter any. 
+
+## Demo 
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/TMDu-C13GkE/0.jpg)](https://www.youtube.com/watch?v=TMDu-C13GkE)
