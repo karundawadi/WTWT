@@ -6,7 +6,7 @@ What to watch tonight is a recommendation system. It has two components :
     * Webserver system 
 * Front-end system 
 
-The fron-end system and back-end system can be found in their own individual directory. The entire front-end system is live at http://recomnly.surge.sh/
+The fron-end system and back-end system can be found in their own individual directory. The entire front-end system is live at https://karundawadi.github.io/WTWT/
 
 ## Back-end system 
 Python and its various libraries (`Pandas`, `Numpy`,`Flask`,`Flask-CORS`) are used to develop the back end system. 
