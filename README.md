@@ -8,13 +8,6 @@ What to watch tonight is a recommendation system. It has two components :
 
 The fron-end system and back-end system can be found in their own individual directory. The entire front-end system is live at https://karundawadi.github.io/WTWT/
 
-## Back-end system 
-Python and its various libraries (`Pandas`, `Numpy`,`Flask`,`Flask-CORS`) are used to develop the back end system. 
-The training and recommendation is done using the data avialble at https://grouplens.org/datasets/movielens/
-
-## Front-end system 
-Front end system is written using Javascript and its various libraries (`React`,`Axios`,`Materail UI`,`Bootstrap`). The live version hosted at https://karundawadi.github.io/WTWT does not work until the backend server is started. To see a working version of the web application please follow instruction on installtion section below. 
-
 ## Steps to run  
 
 1. Install the latest version of [Python](https://www.python.org/downloads/) 
@@ -38,6 +31,25 @@ Front end system is written using Javascript and its various libraries (`React`,
 
 You can fork the repository to make further changes. You can also raise issues if you encounter any. 
 
+## Back-end system 
+Python and its various libraries (`Pandas`, `Numpy`,`Flask`,`Flask-CORS`) are used to develop the back end system. 
+The training and recommendation is done using the data avialble at https://grouplens.org/datasets/movielens/
+
+## Front-end system 
+Front end system is written using Javascript and its various libraries (`React`,`Axios`,`Materail UI`,`Bootstrap`). The live version hosted at https://karundawadi.github.io/WTWT . This does not work until the backend server is started. Please follow the steps to run to start the backend server. 
+
 ## Demo 
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/TMDu-C13GkE/0.jpg)](https://www.youtube.com/watch?v=TMDu-C13GkE)
+
+## Dependencies
+- Node.js
+- React.js
+- Material UI
+- Bootstrap 
+- Axios
+- Python
+- Flask 
+- Flask-CORS
+- Pandas
+- Numpy
