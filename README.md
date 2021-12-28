@@ -15,7 +15,7 @@ The training and recommendation is done using the data avialble at https://group
 ## Front-end system 
 Front end system is written using Javascript and its various libraries (`React`,`Axios`,`Materail UI`,`Bootstrap`). The live version hosted at https://karundawadi.github.io/WTWT does not work until the backend server is started. To see a working version of the web application please follow instruction on installtion section below. 
 
-## Installation 
+## Steps to run  
 
 1. Install the latest version of [Python](https://www.python.org/downloads/) 
 2. Install the latest version of [node.js](https://nodejs.org/en/download/)
