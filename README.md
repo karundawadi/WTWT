@@ -1,6 +1,6 @@
 # What to watch tonight ?
 
-What to watch tonight is a recommendation system. It has two components : 
+What to watch tonight is a movie recommendation system that uses collaborative filtering algorithms to suggest movies to users. It has two components : 
 * Back- end system 
     * Training and recommendation system 
     * Webserver system 
